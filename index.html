@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Sound.js</title>
+<script src="./Sound.js_files/sound.js"></script>
+</head><body>
+<p>Press keyboard keys to control the sounds
+<br>
+<br>Sounds from loaded sound files:
+<br>
+<br>a - Shoot sound
+<br>b - Play music
+<br>c - Pause music
+<br>d - Restart music
+<br>e - Play music from the 10 second point
+<br>f - Play the bounce sound with an echo effect
+<br>g - Fade the music out over 3 seconds
+<br>h - Fade the music in over 3 seconds
+<br>
+<br>Generated sound effects
+<br>
+<br>i - Shoot 
+<br>j - Jump
+<br>k - Explosion 
+<br>l - Bonus
+</p>
+<script src="jquery.min.js"></script>
+<script>
+var arr = ["shoot.mp3","music.mp3","bounce.mp3"]
+var count = 1;
+
+var a = keyboard(65),
+    b = keyboard(66),
+    c = keyboard(67),
+    d = keyboard(68);
+
+a.press = function(){
+  console.log("start new sound")
+
+    sounds.load([arr[count]]);
+
+    sounds.whenLoaded = setup;
+
+    function setup() {
+      console.log("sounds loaded");
+
+      var music = sounds[arr[count]]
+
+      music.loop = true;
+      music.pan = Math.random() * (1 - (-1)) -1;
+      music.volume = Math.random() * (1.5 - (-0)) +0; 
+
+      if (!music.playing) {
+        music.play();
+      }
+    }
+}
+
+b.press = function(){
+  var music = sounds[arr[count]]
+  music.pause();
+ // count++;
+  a.press();
+
+}
+
+c.press = function(){
+  var music = sounds[arr[count]]
+  music.pause();
+}
+
+</script>
+
+</body></html>
